@@ -13,6 +13,7 @@ export interface ICategory {
 export interface IProduct {
   id: string;
   name: string;
+  description: string;
   category: ICategory;
   price: string;
   size: ISize;
