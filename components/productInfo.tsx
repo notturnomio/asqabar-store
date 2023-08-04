@@ -4,19 +4,30 @@ import Button from '@/components/ui/button';
 import Currency from '@/components/ui/currency';
 import { IProduct } from '@/types';
 import { ShoppingCart } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 interface ProductInfoProps {
   data: IProduct;
 }
 
 const ProductInfo: React.FC<ProductInfoProps> = ({ data }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
   return (
     <div>
       <h1 className='text-3xl font-bold text-gray-900'>{data.name}</h1>
       <div className='mt-3 flex items-end justify-between'>
-        <p className='text-2xl font-bold text-gray-900'>
+        <div className='text-2xl font-bold text-gray-900'>
           <Currency value={data?.price} />
-        </p>
+        </div>
       </div>
       <hr className='my-4' />
       <div className='flex flex-col gap-y-6'>

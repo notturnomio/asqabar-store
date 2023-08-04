@@ -5,7 +5,7 @@ import IconButton from '@/components/ui/iconButton';
 import { IColor, ISize } from '@/types';
 import { Dialog } from '@headlessui/react';
 import { Plus, X } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Filter from './filter';
 
 interface MobileFiltersProps {
@@ -14,10 +14,19 @@ interface MobileFiltersProps {
 }
 
 const MobileFilters: React.FC<MobileFiltersProps> = ({ sizes, colors }) => {
-  const [open, setOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
+  const [open, setOpen] = useState(false);
   const onOpen = () => setOpen(true);
   const onClose = () => setOpen(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <>

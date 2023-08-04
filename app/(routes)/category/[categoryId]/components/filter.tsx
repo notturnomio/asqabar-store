@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { IColor, ISize } from '@/types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import queryString from 'query-string';
+import { useEffect, useState } from 'react';
 
 interface FilterProps {
   valueKey: string;
@@ -13,6 +14,12 @@ interface FilterProps {
 }
 
 const Filter: React.FC<FilterProps> = ({ valueKey, name, data }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -40,6 +47,10 @@ const Filter: React.FC<FilterProps> = ({ valueKey, name, data }) => {
 
     router.push(url);
   };
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <div className='mb-8'>
