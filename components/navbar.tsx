@@ -15,7 +15,7 @@ const Navbar = async () => {
           <Link href='/' className='ml-4 flex lg:ml-0 gap-x-2'>
             {/* <p className='font-bold text-xl'>Asqabar</p> */}
             <Image
-              src='/asqabar-logo-black.svg'
+              src='/images/asqabar-logo-black.svg'
               alt='Asqabar Store'
               width={114}
               height={33}
