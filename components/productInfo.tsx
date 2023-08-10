@@ -2,6 +2,7 @@
 
 import Button from '@/components/ui/button';
 import Currency from '@/components/ui/currency';
+import useCart from '@/hooks/useCart';
 import { IProduct } from '@/types';
 import { ShoppingCart } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -12,6 +13,11 @@ interface ProductInfoProps {
 
 const ProductInfo: React.FC<ProductInfoProps> = ({ data }) => {
   const [isMounted, setIsMounted] = useState(false);
+  const cart = useCart();
+
+  const handleAddProductToCart = () => {
+    cart.addItem(data);
+  };
 
   useEffect(() => {
     setIsMounted(true);
@@ -51,7 +57,10 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ data }) => {
         </div>
       </div>
       <div className='mt-10 flex items-center gap-x-3'>
-        <Button className='flex items-center gap-x-2'>
+        <Button
+          onClick={handleAddProductToCart}
+          className='flex items-center gap-x-2'
+        >
           Add To Cart
           <ShoppingCart size={20} />
         </Button>
